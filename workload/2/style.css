@@ -6,16 +6,19 @@ h1 {
     color: maroon;
 }
 
-
-#article-title {
-    font-family: cursive;
-    text-transform: capitalize;
-}
-
 .title {
     color: teal;
 }
 
 .uppercase {
     text-transform: uppercase;
+}
+
+.publish-time {
+    color: gray;
+}
+
+#article-title {
+    font-family: cursive;
+    text-transform: capitalize;
 }
