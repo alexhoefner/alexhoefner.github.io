@@ -6,6 +6,12 @@ h1 {
     color: maroon;
 }
 
+
+#article-title {
+    font-family: cursive;
+    text-transform: capitalize;
+}
+
 .title {
     color: teal;
 }
