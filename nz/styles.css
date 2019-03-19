@@ -4,30 +4,30 @@ body {
   h1 {
     font-size: 28px;
     color: black;
-    font-family: Georgia;
+    font-family: Helvetica;
   }
   h2 {
     font-size: 24px;
     color: black;
-    font-family: Georgia;
+    font-family: Helvetica;
   }
   h3 {
     font-size: 22px;
     color: black;
-    font-family: Georgia;
+    font-family: Helvetica;
   }
   p {
-    font-size: 16px;
+    font-size: 14px;
     color: black;
-    font-family: Georgia;
+    font-family: Helvetica;
   }
   li {
-    font-size: 16px;
+    font-size: 14px;
     color: black;
-    font-family: Georgia;
+    font-family: Helvetica;
   }
   adress {
     font-size: 14pxx;
     color: blue;
-    font-family: Georgia;
+    font-family: Helvetica;
   }
