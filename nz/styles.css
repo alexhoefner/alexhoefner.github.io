@@ -17,7 +17,17 @@ body {
     font-family: Georgia;
   }
   p {
-    font-size: 18px;
+    font-size: 16px;
     color: black;
+    font-family: Georgia;
+  }
+  li {
+    font-size: 16px;
+    color: black;
+    font-family: Georgia;
+  }
+  adress {
+    font-size: 14pxx;
+    color: blue;
     font-family: Georgia;
   }
