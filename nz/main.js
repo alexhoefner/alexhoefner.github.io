@@ -18,3 +18,13 @@ karte.setView(
     [breite, laenge],
     13
 );
+
+// OSM
+L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(karte);
+
+//Positionsmarker hinzufügen
+let pin = L.marker(
+    [breite,laenge]
+).addTo(karte);
+
+
