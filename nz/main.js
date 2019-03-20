@@ -10,4 +10,5 @@ const titel = div.getAttribute("data-title");
 
 //Karte initalisieren
 let karte = L.map("map");
-console.log(karte);
+
+// console.log(karte);
