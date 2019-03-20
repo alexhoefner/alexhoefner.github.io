@@ -8,23 +8,23 @@ header {
     text-align: center;
     background-image: url("images/header.jpg");
     background-position: 0 27%;
-        
+
 }
 
-header h2{
+header h2 {
     font-size: 4em;
     color: white;
-    margin:0;
+    margin: 0;
     padding: 1em 0;
 }
 
-header h3{
+header h3 {
     font-size: 2em;
     color: black;
-    margin:0;
+    margin: 0;
 }
 
-header h4{
+header h4 {
     font-size: 0.75em;
     color: black;
 }
@@ -40,7 +40,7 @@ header h4{
     margin-top: -50px;
 }
 
-address a{
+address a {
     color: grey;
 }
 
@@ -62,7 +62,7 @@ main figcaption {
 }
 
 main figure img {
-    width:80%;
+    width: 80%;
 }
 
 #map {
@@ -72,32 +72,32 @@ main figure img {
 
 }
 
-.back{
-    float:left;
+.back {
+    float: left;
 }
 
-.next{
+.next {
     float: right;
 }
 
 footer {
-    
+
     padding: 1em 0 3em 0;
 }
+
 nav a {
     color: grey;
     font-style: italic
 }
 
 @media only screen and (max-width: 900px) {
-    main figure figcaption
-    {
+    main figure figcaption {
         float: none;
-        margin-left:0;
+        margin-left: 0;
         width: auto;
     }
 }
 
 .wiki {
-    color:grey;
+    color: grey;
 }
