@@ -7,13 +7,13 @@ body {
 header {
     text-align: center;
     background-image: url("images/header.jpg");
-    background-position: 0 27%;
+    background-position: 0 11%;
 
 }
 
 header h2 {
     font-size: 4em;
-    color: white;
+    color: black;
     margin: 0;
     padding: 1em 0;
 }
