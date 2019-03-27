@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Adlerweg - Eisseehütte - Bonn-Matreier-Hütte</title><!-- TODO:Titel der Etappe -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script defer src="main.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <h3>Adlerweg</h3>
+        <h4>Tirols bekanntester Wanderweg</h4>
+        <h2>Eisseehütte - Bonn-Matreier-Hütte</h2> <!-- TODO: eine Überschrift 2 mit dem Titel der Etappe -->
+    </header>
+
+    <div class="author">
+
+
+        <!-- TODO: ein div-Element mit der Klasse "author" -->
+        <figure>
+            <img src="images/user.jpg" alt="Userbild">
+        </figure>
+        <!-- TODO: ein User-(Symbol)Bild mit 100x100 Pixel im Format JPG mit dem Namen user.jpg in einem Unterordner images/ -->
+
+        <!-- TODO: ein address-Element mit zwei Links -->
+        <address>
+            <a href="mailto:Alexander.Hoefner@student.uibk.ac.at"><i class="fas fa-envelope"></i>Alex Hoefner</a>
+            <a href="https://github.com/alexhoefner"><i class="fab fa-github"></i>alexhoefner</a>
+        </address>
+        <!-- TODO: ein Link auf den eigenen github.com Account -->
+    </div>
+    <hr />
+
+    <main>
+        <h1>Adlerweg-Etappe O3: Eisseehütte - Bonn-Matreier-Hütte</h1>
+        <p>Gipfelerlebnisse noch und noch, selbst wenn man die Gipfel nicht erklimmt, sondern auf dem Venediger Höhenweg daran vorbeiwandert. Nach der Eisseehütte im Timmeltal verläuft der Weg ziemlich auf gleicher Höhe bleibend und passiert u.a. eine markante Osttiroler Bergmajestät, den Hohen Eichham. Auch von reizvollen Gebirgsköpfen ist man umgeben, zum Beispiel: Großer und Kleiner Hexenkopf, Säulkopf und Rauhkopf. Die schöne Natur mit ihrem wunderbaren Panorama sorgt dafür, dass die Tour dennoch nicht kopflastig wird. Unterhalb der Wunwand vorbei und zwischen Wunalm und Wunspitze steil hinauf zum Eselrücken. Jetzt ist das Etappenziel, die gemütliche Bonn-Matreier-Hütte, schon ganz nahe.</p>
+        <!-- TODO: eine Überschrift 1 mit dem Titel der Etappe und einem kurzen "Teaser" -->
+        <p>Vor allem im Winter kommen Skiläufer und Snowboarder zu den drei alpinen Skigebieten Treble Cone, Cardrona
+            und Snowpark. Im Sommer ziehen der See und die Wildwasserflüsse mit Wakeboarding, Rafting, Sledging,
+            Kajakfahren und Canyoning die Touristen an. Des Weiteren sind Paragliding, Tandemfallsprünge oder
+            Helibiking, sowie Segeln und Fischen möglich. Wanaka ist außerdem Ausgangspunkt verschiedener Wandertouren
+            in den umliegenden Bergen und den Mount Aspiring National Park (Quelle: <a class="wiki"
+                href="https://de.wikipedia.org/wiki/Wanaka">Wikipedia</a>).</p>
+        <!-- TODO: ein Absatz mit einem Einführungstext zur Etappe aus der Wikipedia plus einem Link auf die Wikipedia-Seite in der Form "(Quelle: Wikipedia)", das Wort "Wikipedia" als Link -->
+        <h2>Lake Wanaka</h2>
+        <!-- TODO: eine Überschrift 2 einer Sehenswürdigkeit der Etappe-->
+
+        <figure>
+            <figcaption><i class="fas fa-camera"></i><em>Lake Wanaka</em></figcaption>
+            <img src="images/attraction.jpg" alt="Lake Wanaka"><br>
+
+        </figure>
+        <!-- TODO: eine vollständige Abbildung mit Bild im JPG-Format und kursiver Bildüberschrift für diese Sehenswürdigkeit. Das Bild soll attraction.jpg heißen, maximal 900 Pixel breit oder hoch sein und im Ordner images/ liegen. Das Bild soll von https://commons.wikimedia.org/ oder https://pixabay.com/ stammen und eine Public Domain, oder CC BY-SA Lizenz besitzen. -->
+        <p>Der Lake Wanaka ist der viertgrößte Binnensee Neuseelands und befindet sich im Westen der Region Otago auf
+            der Südinsel des Landes. Die Maori-Bezeichnung Wanaka leitet sich wahrscheinlich vom Begriff Oanaka ab, was
+            so viel wie "Platz des Anaka" bedeutet (Quelle: <a class="wiki"
+                href="https://de.wikipedia.org/wiki/Lake_Wanaka">Wikipedia</a>).</p>
+        <!-- TODO: ein Absatz mit der Beschreibung der Sehenswürdigkeit aus der Wikipedia plus einem Link auf die Wikipedia-Seite in der Form "(Quelle: Wikipedia)", das Wort "Wikipedia" als Link -->
+
+        <h3>Übersichtskarte</h3>
+        <!-- Koordinaten in Decimal-->
+        <div id="map" data-lat="-44.7000008" data-lng="169.1499939" data-title="Wanaka"></div>
+        <!-- TODO: ein div-Element mit dem id-Attribut "map" und drei weiteren Attributen data-lat, data-lng und data-title. Die Koordinaten von data-lat und data-lng sind als Dezimalgrad mit einem "." als Komma zu schreiben und aus der Wikipedia zu entnehmen. Das data-title Attribut enthält einen Titel für die oben verwendete Sehenswürdigkeit
+    -->
+
+        <h3>Links</h3>
+        <ul>
+            <li><a href="https://www.newzealand.com/de/lake-wanaka/">Sehenswürdigkeiten & Aktivitäten in Wanaka</a></li>
+            <li><a href="https://wikitravel.org/en/Wanaka">Wanaka Wikitravel</a></li>
+            <li><a href="https://www.lakewanaka.co.nz/">Lake Wanaka</a></li>
+            <li><a href="https://www.sommertage.com/roys-peak-wanaka/">Wanderung auf den Roys Peak & Reisetipps für
+                    Wanaka - Sommertage</a></li>
+            </li>
+        </ul>
+        <!-- TODO: 4 Links zu Seiten im Netz die zur Etappe/Sehenswürdigkeit passen als ungeordnete Liste -->
+
+    </main>
+
+    <hr />
+
+    <footer>
+        <nav>
+            <a class="back" href="https://danielhuettel.github.io/nz/index.html"><i class="fas fa-arrow-circle-left">
+                </i>vorhergehender Stop</a>
+            <a class="next" href="https://nicometz.github.io/nz/index.html"></i>nächster Stop<i
+                    class="fas fa-arrow-circle-right"></i></a>
+        </nav>
+        <!-- TODO: ein nav-Element mit zwei Links auf die vorherige Etappe und die nächste Etappe mit den Klassen "back" und "next" sowie den Link-Texten "vorhergehender Stop" und "nächster Stop". Die Links verweisen auf die entsprechenden Etappen in der Form https://username.github.io/nz/index.html -->
+    </footer>
+
+</body>
+
+</html>
