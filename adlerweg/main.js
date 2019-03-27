@@ -37,38 +37,19 @@ let pin2 = L.marker(
 // Popup zum Pin hängen
 // pin1.bindPopup(titel1).openPopup();
 
-// Adlerblicke als Const definieren
-const adlerblicke = [{
-        kunde: "Wilder Kaiser ",
-        standort: "Gruttenhütte",
-        seehoehe: 1640,
-        lat: 47.55564,
-        lng: 12.31861
-    },
-    {
-        kunde: "Bergbahn Scheffau",
-        standort: "Brandstadl",
-        seehoehe: 1640,
-        lat: 47.4912,
-        lng: 12.248
-    },
-    {
-        kunde: "Lechtal Tourismus",
-        standort: "Sonnalm Jöchelspitze",
-        seehoehe: 1786,
-        lat: 47.27528,
-        lng: 10.36505
-    }
-]
-
 // for-Schleife für adlerblicke
-for (let blick of adlerblicke) {
+let blickeGruppe = L.featureGroup().addTo(karte);
+// Adlerblicke groß schreiben, weil Const extern liegt
+for (let blick of ADLERBLICKE) {
     let blickpin = L.marker(
         [blick.lat, blick.lng]
-    ).addTo(karte);
+    ).addTo(blickeGruppe);
 
     blickpin.bindPopup(
-        `<h1>Standort: ${blick.standort}</h1>
+    `<h1>Standort: ${blick.standort}</h1>
     <p>Höhe: ${blick.seehoehe}</p>
     <em>Kunde: ${blick.kunde}</em>`);
 }
+
+console.log(blickeGruppe).getBounds();
+karte.fitBounds(blickeGruppe.getBounds());
