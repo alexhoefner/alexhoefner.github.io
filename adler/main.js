@@ -46,10 +46,10 @@ for (let blick of ADLERBLICKE) {
     ).addTo(blickeGruppe);
 
     blickpin.bindPopup(
-    `<h1>Standort: ${blick.standort}</h1>
+        `<h1>Standort: ${blick.standort}</h1>
     <p>Höhe: ${blick.seehoehe}</p>
     <em>Kunde: ${blick.kunde}</em>`);
 }
 
-console.log(blickeGruppe).getBounds();
+// console.log(blickeGruppe).getBounds();
 karte.fitBounds(blickeGruppe.getBounds());
