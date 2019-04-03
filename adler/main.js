@@ -128,3 +128,10 @@ for (let blick of ADLERBLICKE) {
 
 // console.log(blickeGruppe).getBounds();
 karte.fitBounds(blickeGruppe.getBounds());
+
+// Fullscreen Plugin einbinden (in index.html)
+karte.addControl(new L.Control.Fullscreen());
+
+
+// Leaflet hash Plugin einbinden (Koordinaten in URL)
+var hash = new L.Hash(karte);
