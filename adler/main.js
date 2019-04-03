@@ -66,10 +66,25 @@ const kartenLayer = {
 //     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 // }).addTo(karte);
 
+kartenLayer.osm.addTo(karte);
+
+//Kartenmenü hinzufügen
+L.control.layers({
+    "Geoland Basemap": kartenLayer.geolandbasemap,
+    "Geoland Basemap Overlay": kartenLayer.geolandbasemapoverlay,
+    "Geoland Basemap Grau": kartenLayer.geolandgrey,
+    "Geoland Basemap High DPI": kartenLayer.basemaphighdpi,
+    "Geoland Basemap Orthophoto": kartenLayer.basemaportho,
+    "Geoland Basemap Gelände": kartenLayer.basemapgelaende,
+    "Geoland Basemap Oberfläche": kartenLayer.basemapoberflaeche,
+    "Geoland Open Street Map": kartenLayer.osm,
+    
+
+}).addTo(karte);
 
 
 //kartenLayer.osm.addTo(karte);
-kartenLayer.basemaportho.addTo(karte);
+//kartenLayer.basemaportho.addTo(karte);
 
 //Positionsmarker hinzufügen
 let pin1 = L.marker(
