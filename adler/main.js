@@ -18,10 +18,10 @@ let karte = L.map("map");
 // console.log(karte);
 
 // auf Ausschnitt zoomen
-karte.setView(
-    [47.2, 11.2],
-    8
-);
+// karte.setView(
+//     [47.2, 11.2],
+//     8
+// );
 
 
 // verschiedene basemap.at Kartenlayer einbinden
@@ -112,6 +112,8 @@ let pin2 = L.marker(
 // Popup zum Pin hängen
 // pin1.bindPopup(titel1).openPopup();
 
+
+
 // for-Schleife für adlerblicke
 let blickeGruppe = L.featureGroup().addTo(karte);
 // Adlerblicke groß schreiben, weil Const extern liegt
@@ -126,15 +128,20 @@ for (let blick of ADLERBLICKE) {
     <em>Kunde: ${blick.kunde}</em>`);
 }
 
+// Kartenausdehnung
+let ausschnitt = (blickeGruppe.getBounds());
+ausschnitt.extend(pin1.getLatLng());
+ausschnitt.extend(pin2.getLatLng());
+
 // console.log(blickeGruppe).getBounds();
-karte.fitBounds(blickeGruppe.getBounds());
+karte.fitBounds(ausschnitt);
 
 // Fullscreen Plugin einbinden (in index.html)
 karte.addControl(new L.Control.Fullscreen());
 
 
 // Leaflet hash Plugin einbinden (Koordinaten in URL)
-var hash = new L.Hash(karte);
+// var hash = new L.Hash(karte);
 
 
 // Coordinates Control intialisieren
