@@ -39,6 +39,14 @@ const kartenLayer = {
         subdomains: ['a','b','c'],
         attribution: 'Map tiles by <a href="https://stamen.com/">Stamen Design</a>, under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Data by <a href="https://www.openstreetmap.org/#map=8/47.714/13.349">OpenStreetMap</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/"CC BY SA</a>'
     }),
+    nz_topo50: L.tileLayer("https://tiles-{s}.data-cdn.linz.govt.nz/services;key=cf5306f25e8f44f9aecbd7a0931296a9/tiles/v4/layer=50767/EPSG:3857/{z}/{x}/{y}.png", {
+        subdomains: ['a','b','c'],
+        attribution: 'Map tiles by <a href="https://data.linz.govt.nz/">Linz Data Service</a>, under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 Land Information New Zealand</a>.'
+    }),
+    nz_aerial: L.tileLayer("http://tiles-{s}.data-cdn.linz.govt.nz/services;key=cf5306f25e8f44f9aecbd7a0931296a9/tiles/v4/set=4702/EPSG:3857/{z}/{x}/{y}.png", {
+        subdomains: ['a','b','c'],
+        attribution: 'Map tiles by <a href="https://data.linz.govt.nz/">Linz Data Service</a>, under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 Land Information New Zealand</a>.'
+    }),
 };
 
 // OSM Basemap einbinden
@@ -54,8 +62,9 @@ L.control.layers({
 "Open Street Map": kartenLayer.osm,
 "Stamen Toner": kartenLayer.stamen_toner,
 "Stamen Terrain": kartenLayer.stamen_terrain,
-"Stamen Watercolor": kartenLayer.stamen_watercolor
-
+"Stamen Watercolor": kartenLayer.stamen_watercolor,
+"NZ Topo 50 Map": kartenLayer.nz_topo50,
+"NZ Aerial Imagery": kartenLayer.nz_aerial
 
 }).addTo(karte);
 
@@ -66,7 +75,7 @@ let pin = L.marker(
 ).addTo(karte);
 
 // Popup zum Pin hängen
-pin.bindPopup(titel).openPopup();
+pin.bindPopup(titel);
 
 // Fullscreen Plugin einbinden (in index.html)
 karte.addControl(new L.Control.Fullscreen());
