@@ -67,3 +67,14 @@ let pin = L.marker(
 
 // Popup zum Pin hängen
 pin.bindPopup(titel).openPopup();
+
+// Fullscreen Plugin einbinden (in index.html)
+karte.addControl(new L.Control.Fullscreen());
+
+// Coordinates Control intialisieren
+var coords = new L.Control.Coordinates(); // you can send options to the constructor if you want to, otherwise default values are used
+// Plugin an Karte hängen
+coords.addTo(karte);
+karte.on('click', function(e) {
+	coords.setCoordinates(e);
+});
