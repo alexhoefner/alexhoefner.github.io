@@ -78,20 +78,7 @@ karte.setView(
     15
 );
 
-// console.log(SPORTSTAETTEN);
-
-
-
-var myIcon = L.icon({
-    iconUrl: 'my-icon.png',
-    iconSize: [38, 95],
-    iconAnchor: [22, 94],
-    popupAnchor: [-3, -76],
-    shadowUrl: 'my-icon-shadow.png',
-    shadowSize: [68, 95],
-    shadowAnchor: [22, 94]
-});
-
+console.log(SPORTSTAETTEN);
 
 
 // alle Punkte einlesen
@@ -100,7 +87,8 @@ for (let staette of SPORTSTAETTEN) {
     // Icons einbinden
     let piktogram = L.icon({
         iconUrl: `icons/icon_${staette.icon}_schwarz_auf_weiss_250px.png`,
-        iconSize: [15,15]
+        iconSize: [20,20],
+        
     });
     let staettepin = L.marker([staette.lat, staette.lng], {
         icon: piktogram
@@ -108,7 +96,6 @@ for (let staette of SPORTSTAETTEN) {
     staettepin.bindPopup(
     `<h3>Name: ${staette.name}</h3>
     <p>Adresse: ${staette.adresse}</p>
-    <em>Typ: ${staette.typ}</em>
-    <em>Gruppe: ${staette.gruppe}</em>`);
+    <em>Typ: ${staette.typ}</em>`);
     
 };
