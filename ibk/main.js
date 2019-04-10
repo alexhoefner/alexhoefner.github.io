@@ -90,11 +90,16 @@ karte.on("locationfound", function(event){
     L.marker([
         event.latitude, event.longitude
     ]).addTo(karte);
-    // Buffer hinzufügen
+    // Buffer hinzufügen und Farbe red
     L.circle([
-        event.latitude, event.longitude], {radius: (event.accuracy/2)
+        event.latitude, event.longitude], {radius: (event.accuracy/2), color: "red"
         }).addTo(karte);
+        
 
-})
+});
 
+// Standort nicht gefunden
+karte.on("locationerror", function(event){
+    alert("Leider keinen Standort gefunden")
+});
 
