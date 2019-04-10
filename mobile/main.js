@@ -84,7 +84,7 @@ karte.locate({
     setView : true,
     maxZoom: 16,
     // Marker mitbewegen
-    watch: true
+    
     })
 
 
