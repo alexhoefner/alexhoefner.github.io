@@ -151,3 +151,4 @@ coords.addTo(karte);
 karte.on('click', function(e) {
 	coords.setCoordinates(e);
 });
+
