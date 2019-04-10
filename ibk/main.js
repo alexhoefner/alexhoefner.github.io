@@ -6,10 +6,10 @@ const titel = div.getAttribute("data-title");
 
 let karte = L.map("map");
 
-karte.setView(
-    [breite, laenge],
-    11
-);
+// karte.setView(
+//     [breite, laenge],
+//     11
+// );
 
 const kartenLayer = {
     osm: L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
@@ -61,17 +61,39 @@ const kartenLayer = {
 kartenLayer.osm.addTo(karte);
 
 L.control.layers({
+    "Open Street Map": kartenLayer.osm,
     "Geoland Basemap": kartenLayer.geolandbasemap,
     "Geoland Basemap Overlay": kartenLayer.geolandbasemapoverlay,
     "Geoland Basemap Grau": kartenLayer.geolandgrey,
     "Geoland Basemap High DPI": kartenLayer.basemaphighdpi,
     "Geoland Basemap Orthophoto": kartenLayer.basemaportho,
     "Geoland Basemap Gelände": kartenLayer.basemapgelaende,
-    "Geoland Basemap Oberfläche": kartenLayer.basemapoberflaeche,
-    "Geoland Open Street Map": kartenLayer.osm,
+    "Geoland Basemap Oberfläche": kartenLayer.basemapoberflaeche,    
     "Stamen Toner": kartenLayer.stamen_toner,
     "Stamen Terrain": kartenLayer.stamen_terrain,
     "Stamen Watercolor": kartenLayer.stamen_watercolor
     
 
 }).addTo(karte);
+
+
+// locate IP adress
+karte.locate({
+    setView : true,
+    maxZoom: 16
+    })
+
+
+// Standort abfragen    
+karte.on("locationfound", function(event){
+    console.log(event)
+    L.marker([
+        event.latitude, event.longitude
+    ]).addTo(karte);
+    L.circle([
+        event.latitude, event.longitude], {radius: event.accuracy
+        }).addTo(karte);
+
+})
+
+// Buffer hinzufügen
