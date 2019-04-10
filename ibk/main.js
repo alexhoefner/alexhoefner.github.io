@@ -78,21 +78,33 @@ karte.setView(
     15
 );
 
-console.log(SPORTSTAETTEN);
+// console.log(SPORTSTAETTEN);
 
-var sporty = L.icon({
-    iconUrl: 'images/marker_sports.png',
-    iconSize: [15, 15],
+
+
+var myIcon = L.icon({
+    iconUrl: 'my-icon.png',
+    iconSize: [38, 95],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76],
+    shadowUrl: 'my-icon-shadow.png',
     shadowSize: [68, 95],
     shadowAnchor: [22, 94]
 });
 
-// 
+
+
+// alle Punkte einlesen
 for (let staette of SPORTSTAETTEN) {
-    console.log(staette)
-    let staettepin = L.marker([staette.lat, staette.lng], {icon: sporty}).addTo(karte);
+    // console.log(staette)
+    // Icons einbinden
+    let piktogram = L.icon({
+        iconUrl: `icons/icon_${staette.icon}_schwarz_auf_weiss_250px.png`,
+        iconSize: [15,15]
+    });
+    let staettepin = L.marker([staette.lat, staette.lng], {
+        icon: piktogram
+    }).addTo(karte);
     staettepin.bindPopup(
     `<h3>Name: ${staette.name}</h3>
     <p>Adresse: ${staette.adresse}</p>
