@@ -6,10 +6,6 @@ const titel = div.getAttribute("data-title");
 
 let karte = L.map("map");
 
-// karte.setView(
-//     [breite, laenge],
-//     11
-// );
 
 const kartenLayer = {
     osm: L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
@@ -77,34 +73,10 @@ L.control.layers({
 }).addTo(karte);
 
 
-let positionsMarker = L.marker([47,11]).addTo(karte);
-
-// locate IP adress
-karte.locate({
-    setView : true,
-    maxZoom: 16,
-    // Marker mitbewegen
-    watch: true
-    })
+karte.setView(
+    [47.267222, 11.392778],
+    15
+);
 
 
-// Standort abfragen    
-karte.on("locationfound", function(event){
-    console.log(event)
-    
-    // L.marker([event.latlng, event.longitude]).addTo(karte);
-
-    positionsMarker.setLatLng(event.latlng)
-    // Buffer hinzufügen und Farbe red
-    L.circle([
-        event.latitude, event.longitude], {radius: (event.accuracy/2), color: "yellow"
-        }).addTo(karte);
-        
-
-});
-
-// Standort nicht gefunden
-karte.on("locationerror", function(event){
-    alert("Leider keinen Standort gefunden")
-});
 
