@@ -77,22 +77,27 @@ L.control.layers({
 }).addTo(karte);
 
 
+let positionsMarker = L.marker([47,11]).addTo(karte);
+
 // locate IP adress
 karte.locate({
     setView : true,
-    maxZoom: 16
+    maxZoom: 16,
+    // Marker mitbewegen
+    watch: true
     })
 
 
 // Standort abfragen    
 karte.on("locationfound", function(event){
     console.log(event)
-    L.marker([
-        event.latitude, event.longitude
-    ]).addTo(karte);
+    
+    // L.marker([event.latlng, event.longitude]).addTo(karte);
+
+    positionsMarker.setLatLng(event.latlng)
     // Buffer hinzufügen und Farbe red
     L.circle([
-        event.latitude, event.longitude], {radius: (event.accuracy/2), color: "red"
+        event.latitude, event.longitude], {radius: (event.accuracy/2), color: "yellow"
         }).addTo(karte);
         
 
