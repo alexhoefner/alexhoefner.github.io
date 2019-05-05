@@ -88,10 +88,12 @@ for (let staette of SPORTSTAETTEN) {
     let piktogram = L.icon({
         iconUrl: `icons/icon_${staette.icon}_schwarz_auf_weiss_250px.png`,
         iconSize: [20,20],
+        iconAnchor: [100,100]
         
     });
     let staettepin = L.marker([staette.lat, staette.lng], {
         icon: piktogram
+                
     }).addTo(karte);
     staettepin.bindPopup(
     `<h3>Name: ${staette.name}</h3>
