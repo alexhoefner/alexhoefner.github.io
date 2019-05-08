@@ -10,3 +10,8 @@ body {
 h1 {
     font-size: 1em
 }
+
+.leaflet-div-icon {
+    background: none;
+    border: none;
+}
