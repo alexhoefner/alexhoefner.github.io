@@ -54,7 +54,7 @@ const kartenLayer = {
     }),
 };
 
-kartenLayer.osm.addTo(karte);
+kartenLayer.geolandbasemap.addTo(karte);
 
 const layerControl = L.control.layers({
     "Open Street Map": kartenLayer.osm,
@@ -108,7 +108,7 @@ async function loadStations() {
             // ? if Abfrage: ?if :else
         })
         .addTo(awsTirol);
-    awsTirol.addTo(karte);
+    //awsTirol.addTo(karte);
     // Ausschnitt
     karte.fitBounds(awsTirol.getBounds());
     layerControl.addOverlay(awsTirol, "Wetterstationen Tirol");
@@ -135,6 +135,58 @@ async function loadStations() {
         }
     }).addTo(windLayer);
     layerControl.addOverlay(windLayer, "Windrichtung");
-    windLayer.addTo(karte)
+    //windLayer.addTo(karte)
+
+    //Schneelayer hinzufügen
+
+const snowLayer = L.featureGroup();
+const farbpalette = [
+    [0, "#fc0043"],
+    [1, "blue"],
+    [10, "orange"],
+    [25, "orange"],
+    [50, "red"],
+    [100, ""],
+    [200, ""],
+    [300, ""],
+    [400, "blue"],
+  
+   
+]
+L.geoJson(stations, {
+    pointToLayer: function (feature, latlng) {
+        if (feature.properties.HS) {
+            let color = "red";
+            for (let i=0; i<farbpalette.length;i++){
+                console.log(farbpalette[i],feature.properties.HS);
+                if (feature.properties.HS <farbpalette[i][0]){
+                    color = farbpalette[i][1];
+                    break;
+                }
+            }
+            if (feature.properties.HS < 0) {
+                feature.properties.HS = "noData"
+            }
+            if (feature.properties.HS > 100){
+                color = "orange" 
+            }
+            if (feature.properties.HS > 200){   
+                color = "red"
+            }
+            
+            return L.marker(latlng, {
+                icon: L.divIcon({
+                    html: `<div class="schneeLabel" style ="background-color: ${color}">${feature.properties.HS}</div>`
+                
+                })
+
+            });
+
+        }
+    }
+}).addTo(snowLayer);
+layerControl.addOverlay(snowLayer, "Schneehöhe");
+snowLayer.addTo(karte);
 }
+
 loadStations();
