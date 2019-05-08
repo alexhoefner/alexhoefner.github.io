@@ -112,12 +112,20 @@ async function loadStations() {
     // Ausschnitt
     karte.fitBounds(awsTirol.getBounds());
     layerControl.addOverlay(awsTirol, "Wetterstationen Tirol");
+    const windLayer = L.featureGroup();
     L.geoJson(stations, {
         pointToLayer: function (feature, latlng) {
             if (feature.properties.WR) {
+                let color = "black";
+                if (feature.properties.WG > 15){
+                    color = "orange" 
+                }
+                if (feature.properties.WG > 30){   
+                    color = "red"
+                }
                 return L.marker(latlng, {
                     icon: L.divIcon({
-                        html: `<i style="transform: rotate(${feature.properties.WR}deg)" class="fas fa-arrow-circle-up fa-3x"></i>`
+                        html: `<i style="color: ${color};transform: rotate(${feature.properties.WR}deg)" class="fas fa-arrow-up fa-3x"></i>`
                     
                     })
 
@@ -125,6 +133,8 @@ async function loadStations() {
 
             }
         }
-    }).addTo(karte);
+    }).addTo(windLayer);
+    layerControl.addOverlay(windLayer, "Windrichtung");
+    windLayer.addTo(karte)
 }
 loadStations();
