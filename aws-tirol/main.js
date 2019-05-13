@@ -115,6 +115,7 @@ async function loadStations() {
     const windLayer = L.featureGroup();
     const farbpalette_wind = [
 
+        //TODO: Umrechnen von Beaufort
         [12.96, "rgb(0,185,0)"],
         [20.37, "rgb(16,205,36)"],
         [29.63, "rgb(114,212,117)"],
@@ -215,7 +216,124 @@ async function loadStations() {
         }
     }).addTo(snowLayer);
     layerControl.addOverlay(snowLayer, "Schneehöhe");
-    snowLayer.addTo(karte);
+    //snowLayer.addTo(karte);
+
+    //Temperaturlayer hinzufügen
+
+    const TempLayer = L.featureGroup();
+    const farbpalette_temp = [
+
+        [-30, "rgb(100,102,100)"],
+        [-28, "rgb(140,138,140)"],
+        [-26, "rgb(180,178,180)"],
+        [-24, "rgb(204,206,204)"],
+        [-22, "rgb(228,230,228)"],
+        [-20, "rgb(119,45,118)"],
+        [-18, "rgb(177,35,176)"],
+        [-16, "rgb(210,25,209)"],
+        [-14, "rgb(255,0,255)"],
+        [-12, "rgb(255,148,255)"],
+        [-10, "rgb(56,0,209)"],
+        [-8, "rgb(50,90,254)"],
+        [-6, "rgb(38,149,255)"],
+        [-4, "rgb(255,123,0)"],
+        [-2, "rgb(0,205,255)"],
+        [0, "rgb(0,255,254)"],
+        [2, "rgb(0,120,0)"],
+        [4, "rgb(0,157,0)"],
+        [6, "rgb(0,188,2)"],
+        [8, "rgb(0,226,0)"],
+        [10, "rgb(0,255,0)"],
+        [12, "rgb(252,255,0)"],
+        [14, "rgb(253,242,0)"],
+        [16, "rgb(253,225,0)"],
+        [18, "rgb(255,209,0)"],
+        [20, "rgb(255,189,0)"],
+        [22, "rgb(255,173,0)"],
+        [24, "rgb(255,156,0)"],
+        [26, "rgb(255,120,0)"],
+        [28, "rgb(255,0,0)"],
+        [30, "rgb(243,1,2)"],
+        [32, "rgb(210,0,0)"],
+        [34, "rgb(193,0,0)"],
+        [36, "rgb(177,0,0)"],
+        [38, "rgb(161,0,0)"],
+        [40, "rgb(144,0,0)"],
+        [42, "rgb(119,1,0)"],
+        [44, "rgb(95,1,0)"],
+        [46, "rgb(70,1,1)"],
+        [48, "rgb(46,2,3)"],
+    ]
+    L.geoJson(stations, {
+        pointToLayer: function (feature, latlng) {
+            if (feature.properties.LT) {
+                let color = "red";
+                for (let i = 0; i < farbpalette_temp.length; i++) {
+                    console.log(farbpalette_temp[i], feature.properties.LT);
+                    if (feature.properties.LT < farbpalette_temp[i][0]) {
+                        color = farbpalette_temp[i][1];
+                        break;
+                    }
+                }
+                if (feature.properties.LT < -99) {
+                    feature.properties.LT = "noData",
+                        color = "white"
+                }
+ 
+                return L.marker(latlng, {
+                    icon: L.divIcon({
+                        html: `<div class="tempLabel" style ="background-color: ${color}">${feature.properties.LT}</div>`
+
+                    })
+
+                });
+
+            }
+        }
+    }).addTo(TempLayer);
+    layerControl.addOverlay(TempLayer, "Lufttemperatur");
+    //TempLayer.addTo(karte);    
+
+    // Feuchtelayer hinzufügen
+    const HumLayer = L.featureGroup();
+    const farbpalette_hum = [
+
+        [20, "rgb(238,238,238)"],
+        [30, "rgb(221,221,221)"],
+        [40, "rgb(198,201,206)"],
+        [50, "rgb(187,187,187)"],
+        [60, "rgb(170,170,204)"],
+        [70, "rgb(153,152,221)"],
+        [80, "rgb(135,136,238)"],
+        [90, "rgb(118,119,225)"],
+
+    ]
+    L.geoJson(stations, {
+        pointToLayer: function (feature, latlng) {
+            if (feature.properties.RH) {
+                let color = "red";
+                for (let i = 0; i < farbpalette_hum.length; i++) {
+                    console.log(farbpalette_hum[i], feature.properties.RH);
+                    if (feature.properties.RH < farbpalette_hum[i][0]) {
+                        color = farbpalette_hum[i][1];
+                        break;
+                    }
+                }
+                
+                
+                return L.marker(latlng, {
+                    icon: L.divIcon({
+                        html: `<div class="humLabel" style ="background-color: ${color}">${feature.properties.RH}</div>`
+
+                    })
+
+                });
+
+            }
+        }
+    }).addTo(HumLayer);
+    layerControl.addOverlay(HumLayer, "Relative Feuchte");
+    HumLayer.addTo(karte);    
 }
 
 loadStations();
