@@ -140,16 +140,20 @@ async function loadStations() {
     //Schneelayer hinzufügen
 
 const snowLayer = L.featureGroup();
-const farbpalette = [
-    [0, "#fc0043"],
-    [1, "blue"],
-    [10, "orange"],
-    [25, "orange"],
-    [50, "red"],
-    [100, ""],
-    [200, ""],
-    [300, ""],
-    [400, "blue"],
+const farbpalette_snow = [
+    
+    [0, "rgb(173,189,99)"],
+    [10, "rgb(255,123,0)"],
+    [20, "rgb(66,239,66)"],
+    [30, "rgb(99,255,198)"],
+    [50, "rgb(33,189,255)"],
+    [75, "rgb(57,107,189)"],
+    [100, "rgb(255,99,255)"],
+    [150, "rgb(255,255,0)"],
+    [200, "rgb(255,189,0)"],
+    [250, "rgb(255,0,132)"],
+    [300, "rgb(123,0,132)"],
+    [400, "rgb(0,0,0)"],
   
    
 ]
@@ -157,22 +161,23 @@ L.geoJson(stations, {
     pointToLayer: function (feature, latlng) {
         if (feature.properties.HS) {
             let color = "red";
-            for (let i=0; i<farbpalette.length;i++){
-                console.log(farbpalette[i],feature.properties.HS);
-                if (feature.properties.HS <farbpalette[i][0]){
-                    color = farbpalette[i][1];
+            for (let i=0; i<farbpalette_snow.length;i++){
+                console.log(farbpalette_snow[i],feature.properties.HS);
+                if (feature.properties.HS <farbpalette_snow[i][0]){
+                    color = farbpalette_snow[i][1];
                     break;
                 }
             }
             if (feature.properties.HS < 0) {
-                feature.properties.HS = "noData"
-            }
-            if (feature.properties.HS > 100){
-                color = "orange" 
-            }
-            if (feature.properties.HS > 200){   
-                color = "red"
-            }
+                feature.properties.HS = "noData",
+                color = "white"
+             }
+            // if (feature.properties.HS > 100){
+            //     color = "orange" 
+            // }
+            // if (feature.properties.HS > 200){   
+            //     color = "red"
+            // }
             
             return L.marker(latlng, {
                 icon: L.divIcon({
