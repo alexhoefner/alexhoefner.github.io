@@ -113,20 +113,44 @@ async function loadStations() {
     karte.fitBounds(awsTirol.getBounds());
     layerControl.addOverlay(awsTirol, "Wetterstationen Tirol");
     const windLayer = L.featureGroup();
+    const farbpalette_wind = [
+
+        [12.96, "rgb(0,185,0)"],
+        [20.37, "rgb(16,205,36)"],
+        [29.63, "rgb(114,212,117)"],
+        [30, "rgb(254,214,211)"],
+        [50, "rgb(255,182,179)"],
+        [75, "rgb(255,158,154)"],
+        [100, "rgb(255,130,129)"],
+        [150, "rgb(255,97,96)"],
+        [118.529999, "rgb(255,69,60)"],
+        [118.53, "rgb(255,32,14)"],
+    ]
     L.geoJson(stations, {
         pointToLayer: function (feature, latlng) {
             if (feature.properties.WR) {
                 let color = "black";
-                if (feature.properties.WG > 15){
-                    color = "orange" 
+                for (let i = 0; i < farbpalette_wind.length; i++) {
+                    console.log(farbpalette_wind[i], feature.properties.WG);
+                    if (feature.properties.WG < farbpalette_wind[i][0]) {
+                        color = farbpalette_wind[i][1];
+                        break;
+                    }
                 }
-                if (feature.properties.WG > 30){   
-                    color = "red"
+                if (feature.properties.WG < 0) {
+                    feature.properties.WG = "noData"
+                    color = "white"
                 }
+                // if (feature.properties.WG > 15) {
+                //     color = "orange"
+                // }
+                // if (feature.properties.WG > 30) {
+                //     color = "red"
+                // }
                 return L.marker(latlng, {
                     icon: L.divIcon({
                         html: `<i style="color: ${color};transform: rotate(${feature.properties.WR}deg)" class="fas fa-arrow-up fa-3x"></i>`
-                    
+                        
                     })
 
                 });
@@ -139,59 +163,59 @@ async function loadStations() {
 
     //Schneelayer hinzufügen
 
-const snowLayer = L.featureGroup();
-const farbpalette_snow = [
-    
-    [0, "rgb(173,189,99)"],
-    [10, "rgb(255,123,0)"],
-    [20, "rgb(66,239,66)"],
-    [30, "rgb(99,255,198)"],
-    [50, "rgb(33,189,255)"],
-    [75, "rgb(57,107,189)"],
-    [100, "rgb(255,99,255)"],
-    [150, "rgb(255,255,0)"],
-    [200, "rgb(255,189,0)"],
-    [250, "rgb(255,0,132)"],
-    [300, "rgb(123,0,132)"],
-    [400, "rgb(0,0,0)"],
-  
-   
-]
-L.geoJson(stations, {
-    pointToLayer: function (feature, latlng) {
-        if (feature.properties.HS) {
-            let color = "red";
-            for (let i=0; i<farbpalette_snow.length;i++){
-                console.log(farbpalette_snow[i],feature.properties.HS);
-                if (feature.properties.HS <farbpalette_snow[i][0]){
-                    color = farbpalette_snow[i][1];
-                    break;
+    const snowLayer = L.featureGroup();
+    const farbpalette_snow = [
+
+        [0, "rgb(173,189,99)"],
+        [10, "rgb(255,123,0)"],
+        [20, "rgb(66,239,66)"],
+        [30, "rgb(99,255,198)"],
+        [50, "rgb(33,189,255)"],
+        [75, "rgb(57,107,189)"],
+        [100, "rgb(255,99,255)"],
+        [150, "rgb(255,255,0)"],
+        [200, "rgb(255,189,0)"],
+        [250, "rgb(255,0,132)"],
+        [300, "rgb(123,0,132)"],
+        [400, "rgb(0,0,0)"],
+
+
+    ]
+    L.geoJson(stations, {
+        pointToLayer: function (feature, latlng) {
+            if (feature.properties.HS) {
+                let color = "red";
+                for (let i = 0; i < farbpalette_snow.length; i++) {
+                    console.log(farbpalette_snow[i], feature.properties.HS);
+                    if (feature.properties.HS < farbpalette_snow[i][0]) {
+                        color = farbpalette_snow[i][1];
+                        break;
+                    }
                 }
+                if (feature.properties.HS < 0) {
+                    feature.properties.HS = "noData",
+                        color = "white"
+                }
+                // if (feature.properties.HS > 100){
+                //     color = "orange" 
+                // }
+                // if (feature.properties.HS > 200){   
+                //     color = "red"
+                // }
+
+                return L.marker(latlng, {
+                    icon: L.divIcon({
+                        html: `<div class="schneeLabel" style ="background-color: ${color}">${feature.properties.HS}</div>`
+
+                    })
+
+                });
+
             }
-            if (feature.properties.HS < 0) {
-                feature.properties.HS = "noData",
-                color = "white"
-             }
-            // if (feature.properties.HS > 100){
-            //     color = "orange" 
-            // }
-            // if (feature.properties.HS > 200){   
-            //     color = "red"
-            // }
-            
-            return L.marker(latlng, {
-                icon: L.divIcon({
-                    html: `<div class="schneeLabel" style ="background-color: ${color}">${feature.properties.HS}</div>`
-                
-                })
-
-            });
-
         }
-    }
-}).addTo(snowLayer);
-layerControl.addOverlay(snowLayer, "Schneehöhe");
-snowLayer.addTo(karte);
+    }).addTo(snowLayer);
+    layerControl.addOverlay(snowLayer, "Schneehöhe");
+    snowLayer.addTo(karte);
 }
 
 loadStations();
