@@ -106,6 +106,23 @@ async function loadSights(url) {
     // GeoJson zu Marker Cluster Gruppe hinzufügen
     clusterGruppe.addLayer(geoJson);
     karte.addLayer(clusterGruppe);
+    layerControl.addOverlay(clusterGruppe, "Sehenswürdigkeiten");
+
+    // Suchfeld hinzufügen
+    const suchFeld = new L.control.search({
+        layer: clusterGruppe,
+        propertyName: "NAME",
+        zoom: 18
+    })
+    karte.addControl(suchFeld)
 
 }
 loadSights(url);
+
+// Maßstab hinzufügen
+const massstab = L.control.scale({
+    imperial: false,
+    metric: true
+});
+//massstab.addTo(karte);
+karte.addControl(massstab);
