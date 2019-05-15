@@ -86,7 +86,7 @@ function makeMarker (feature, latlng){
         <h3>${feature.properties.NAME}</h3>
         <p>${feature.properties.BEMERKUNG}</p>   
         <hr>
-        <footer><a href="${feature.properties.WEITERE_INF}">Weblink</a></footer>
+        <footer><a href="${feature.properties.WEITERE_INF}" target="_blank">Weblink</a></footer>
         `);
         return sightMarker
 }
@@ -112,7 +112,8 @@ async function loadSights(url) {
     const suchFeld = new L.control.search({
         layer: clusterGruppe,
         propertyName: "NAME",
-        zoom: 18
+        zoom: 18,
+        initial: false
     })
     karte.addControl(suchFeld)
 
@@ -126,3 +127,30 @@ const massstab = L.control.scale({
 });
 //massstab.addTo(karte);
 karte.addControl(massstab);
+
+
+// Spazierwege
+const wegeurl = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SPAZIERLINIEOGD &srsName=EPSG:4326&outputFormat=json";
+
+function linienPopup(feature, layer){
+    const popup = `
+    <h3>${feature.properties.NAME}</h3>`
+    layer.bindPopup(popup)
+}
+
+async function loadWege(wegeurl) {
+    const antwort = await fetch(wegeurl);
+    const wegeData = await antwort.json();
+    const wegeJson = L.geoJson(wegeData,{
+        style: function() {
+            return {
+                color: "red"
+            };
+        },
+        onEachFeature: linienPopup
+    });
+    karte.addLayer(wegeJson);
+    layerControl.addOverlay(wegeJson, "Spazierwege");
+
+}
+loadWege(wegeurl);
