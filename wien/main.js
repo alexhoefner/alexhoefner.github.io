@@ -73,10 +73,10 @@ karte.setView([48.208333, 16.373056], 12);
 const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SPAZIERPUNKTOGD &srsName=EPSG:4326&outputFormat=json";
 
 // ausgelagerte Funktion
-function makeMarker (feature, latlng){
+function makeMarker(feature, latlng) {
     const fotoIcon = L.icon({
         iconUrl: "http://www.data.wien.gv.at/icons/sehenswuerdigogd.png",
-        iconSize: [13,13]
+        iconSize: [13, 13]
     })
 
     const sightMarker = L.marker(latlng, {
@@ -88,7 +88,7 @@ function makeMarker (feature, latlng){
         <hr>
         <footer><a href="${feature.properties.WEITERE_INF}" target="_blank">Weblink</a></footer>
         `);
-        return sightMarker
+    return sightMarker
 }
 
 
@@ -132,7 +132,7 @@ karte.addControl(massstab);
 // Spazierwege
 const wegeurl = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SPAZIERLINIEOGD &srsName=EPSG:4326&outputFormat=json";
 
-function linienPopup(feature, layer){
+function linienPopup(feature, layer) {
     const popup = `
     <h3>${feature.properties.NAME}</h3>`
     layer.bindPopup(popup)
@@ -141,8 +141,8 @@ function linienPopup(feature, layer){
 async function loadWege(wegeurl) {
     const antwort = await fetch(wegeurl);
     const wegeData = await antwort.json();
-    const wegeJson = L.geoJson(wegeData,{
-        style: function() {
+    const wegeJson = L.geoJson(wegeData, {
+        style: function () {
             return {
                 color: "red"
             };
