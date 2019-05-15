@@ -133,7 +133,10 @@ async function loadStations() {
                 let color = "black";
                 for (let i = 0; i < farbpalette_wind.length; i++) {
                     console.log(farbpalette_wind[i], feature.properties.WG);
-                    if (feature.properties.WG < farbpalette_wind[i][0]) {
+                    if (feature.properties.WG == -99){
+                        color = "white"
+                    }
+                    else if (feature.properties.WG < farbpalette_wind[i][0]) {
                         color = farbpalette_wind[i][1];
                         break;
                     }
@@ -161,6 +164,9 @@ async function loadStations() {
     }).addTo(windLayer);
     layerControl.addOverlay(windLayer, "Windrichtung");
     //windLayer.addTo(karte)
+
+
+
 
     //Schneelayer hinzufügen
 
@@ -339,4 +345,18 @@ async function loadStations() {
 loadStations();
 
 
-
+// Array beispiel
+let farben = [
+    [0,"blau"],
+    [5,"gelb"],
+    [10, "rot"]
+];
+// Länge
+farben.length;
+// Array 1 anzeigen: "0, blau" und Array 1[1]: "blau"
+farben[0][1];
+// Schleife über Array
+// i++ nach jeder Schleife i erhöhen
+for(let i=0; i < farben.length; i++){
+    console.log(farben[i]);
+}
