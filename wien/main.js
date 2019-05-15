@@ -72,25 +72,40 @@ karte.setView([48.208333, 16.373056], 12);
 // die Implementierung der Karte startet hier
 const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SPAZIERPUNKTOGD &srsName=EPSG:4326&outputFormat=json";
 
+// ausgelagerte Funktion
+function makeMarker (feature, latlng){
+    const fotoIcon = L.icon({
+        iconUrl: "http://www.data.wien.gv.at/icons/sehenswuerdigogd.png",
+        iconSize: [13,13]
+    })
+
+    const sightMarker = L.marker(latlng, {
+        icon: fotoIcon
+    })
+    sightMarker.bindPopup(`
+        <h3>${feature.properties.NAME}</h3>
+        <p>${feature.properties.BEMERKUNG}</p>   
+        <hr>
+        <footer><a href="${feature.properties.WEITERE_INF}">Weblink</a></footer>
+        `);
+        return sightMarker
+}
+
+
+
 async function loadSights(url) {
+
+    // add Cluster Group
+    const clusterGruppe = L.markerClusterGroup();
     const response = await fetch(url);
     const sightsData = await response.json();
-    L.geoJson(sightsData, {
-        pointToLayer: function(feature, latlng){
-            return L.marker(latlng, {
-                icon: L.icon(
-                    {
-                        iconUrl: "http://www.data.wien.gv.at/icons/sehenswuerdigogd.png",
-                        iconSize: [13,13]
-                    }
-                )
-            })
-                .bindPopup(`
-                <h3>${feature.properties.NAME}</h3>
-                <p>${feature.properties.BEMERKUNG}</p>   
-                `);
-        }
-    }).addTo(karte);
+    const geoJson = L.geoJson(sightsData, {
+        // wie wird Punkt dargestellt
+        pointToLayer: makeMarker
+    });
+    // GeoJson zu Marker Cluster Gruppe hinzufügen
+    clusterGruppe.addLayer(geoJson);
+    karte.addLayer(clusterGruppe);
 
 }
 loadSights(url);
