@@ -79,4 +79,54 @@ new L.Control.MiniMap(
     }
 ).addTo(karte);
 
+
 // die Implementierung der Karte startet hier
+const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:WLANWIENATOGD&srsName=EPSG:4326&outputFormat=json";
+
+// ausgelagerte Funktion
+function makeMarker(feature, latlng) {
+    const fotoIcon = L.icon({
+        iconUrl: "http://www.data.wien.gv.at/icons/wlanwienatogd.png",
+        iconSize: [13, 13]
+    })
+
+    const sightMarker = L.marker(latlng, {
+        icon: fotoIcon
+    })
+    sightMarker.bindPopup(`
+        <h3>${feature.properties.NAME}</h3>
+        <p>${feature.properties.ADRESSE}</p>   
+        <hr>
+        <footer><a href="${feature.properties.WEITERE_INF}" target="_blank">Weblink</a></footer>
+        `);
+    return sightMarker
+}
+
+
+
+async function loadWlan(url) {
+
+    // add Cluster Group
+    const clusterGruppe = L.markerClusterGroup();
+    const response = await fetch(url);
+    const sightsData = await response.json();
+    const geoJson = L.geoJson(sightsData, {
+        // wie wird Punkt dargestellt
+        pointToLayer: makeMarker
+    });
+    // GeoJson zu Marker Cluster Gruppe hinzufügen
+    clusterGruppe.addLayer(geoJson);
+    karte.addLayer(clusterGruppe);
+    layerControl.addOverlay(clusterGruppe, "Public WLAN Standorte");
+
+    // Suchfeld hinzufügen
+    const suchFeld = new L.control.search({
+        layer: clusterGruppe,
+        propertyName: "NAME",
+        zoom: 18,
+        initial: false
+    })
+    karte.addControl(suchFeld)
+
+}
+loadWlan(url);
