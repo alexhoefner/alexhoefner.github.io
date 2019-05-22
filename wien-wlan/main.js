@@ -67,12 +67,14 @@ kartenLayer.bmapgrau.addTo(karte);
 
 karte.addControl(new L.Control.Fullscreen());
 
+// Wiki Gruppe erstellen
 const wikiGruppe = L.featureGroup().addTo(karte);
 layerControl.addOverlay(wikiGruppe, "Wikipedia Artikel");
 
 
 // Wikipedia Artikel laden
 async function wikiArtikelLaden(url) {
+    wikiGruppe.clearLayers();
     console.log("lade", url);
 
     const antwort = await fetch(url);
@@ -82,7 +84,7 @@ async function wikiArtikelLaden(url) {
     for (let artikel of jsonDaten.geonames) {
         // Icon erstellen
         const wikiIcon = L.icon({
-            iconUrl: "icons/wiki.png",
+            iconUrl: "icons/wiki_2.png",
             iconSize: [30, 30]
         })
         const wikipediaMarker = L.marker([artikel.lat, artikel.lng], {
@@ -99,6 +101,9 @@ async function wikiArtikelLaden(url) {
     }
 }
 
+//
+let letzteGeonamesUrl = null;
+
 // Wikipedia Artikel laden
 karte.on("load zoomend moveend", function () {
     // console.log("karte geladen", karte.getBounds());
@@ -112,9 +117,14 @@ karte.on("load zoomend moveend", function () {
     // console.log(ausschnitt)
     const geonamesUrl = `http://api.geonames.org/wikipediaBoundingBoxJSON?formatted=true&north=${ausschnitt.n}&south=${ausschnitt.s}&east=${ausschnitt.o}&west=${ausschnitt.w}&username=webmapping&style=full&maxRows=5&lang=de`;
     // console.log(geonamesUrl);
-
-    // Json Artikel laden
-    wikiArtikelLaden(geonamesUrl);
+    // If Abfrage
+    if (geonamesUrl != letzteGeonamesUrl) {
+        // Json Artikel laden
+        wikiArtikelLaden(geonamesUrl);
+        letzteGeonamesUrl = geonamesUrl
+    }
+    
+    
 });
 
 karte.setView([48.208333, 16.373056], 12);
