@@ -26,50 +26,50 @@ let karte = L.map("map");
 
 // verschiedene basemap.at Kartenlayer einbinden
 const kartenLayer = {
-        osm: L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-            subdomains: ['a','b','c'],
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-        }),
-        geolandbasemap: L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
-            subdomains: ['maps','maps1','maps2','maps3','maps4'],
-            attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
-        }),
-        geolandbasemapoverlay: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png", {
-            subdomains: ['maps','maps1','maps2','maps3','maps4'],
-            attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
-        }),
-        geolandgrey: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png", {
-            subdomains: ['maps','maps1','maps2','maps3','maps4'],
-            attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
-        }),
-        basemaphighdpi: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaphidpi/normal/google3857/{z}/{y}/{x}.jpeg", {
-            subdomains: ['maps','maps1','maps2','maps3','maps4'],
-            attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
-        }),
-        basemaportho: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg", {
-            subdomains: ['maps','maps1','maps2','maps3','maps4'],
-            attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
-        }),
-        basemapgelaende: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapgelaende/grau/google3857/{z}/{y}/{x}.jpeg", {
-            subdomains: ['maps','maps1','maps2','maps3','maps4'],
-            attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
-        }),
-        basemapoberflaeche: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapoberflaeche/grau/google3857/{z}/{y}/{x}.jpeg", {
-            subdomains: ['maps','maps1','maps2','maps3','maps4'],
-            attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
-        }),
-        stamen_toner: L.tileLayer("https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png", {
-            subdomains: ['a','b','c'],
-            attribution: 'Map tiles by <a href="https://stamen.com/">Stamen Design</a>, under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Data by <a href="https://www.openstreetmap.org/#map=8/47.714/13.349">OpenStreetMap</a> under <a href="https://www.openstreetmap.org/copyright"ODbL</a>'
-        }),
-        stamen_terrain: L.tileLayer("https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg", {
-            subdomains: ['a','b','c'],
-            attribution: 'Map tiles by <a href="https://stamen.com/">Stamen Design</a>, under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Data by <a href="https://www.openstreetmap.org/#map=8/47.714/13.349">OpenStreetMap</a> under <a href="https://www.openstreetmap.org/copyright"ODbL</a>'
-        }),
-        stamen_watercolor: L.tileLayer("https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg", {
-            subdomains: ['a','b','c'],
-            attribution: 'Map tiles by <a href="https://stamen.com/">Stamen Design</a>, under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Data by <a href="https://www.openstreetmap.org/#map=8/47.714/13.349">OpenStreetMap</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/"CC BY SA</a>'
-        }),
+    osm: L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+        subdomains: ['a', 'b', 'c'],
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+    }),
+    geolandbasemap: L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
+        subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+        attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
+    }),
+    geolandbasemapoverlay: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png", {
+        subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+        attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
+    }),
+    geolandgrey: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png", {
+        subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+        attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
+    }),
+    basemaphighdpi: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaphidpi/normal/google3857/{z}/{y}/{x}.jpeg", {
+        subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+        attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
+    }),
+    basemaportho: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg", {
+        subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+        attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
+    }),
+    basemapgelaende: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapgelaende/grau/google3857/{z}/{y}/{x}.jpeg", {
+        subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+        attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
+    }),
+    basemapoberflaeche: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapoberflaeche/grau/google3857/{z}/{y}/{x}.jpeg", {
+        subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+        attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
+    }),
+    stamen_toner: L.tileLayer("https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png", {
+        subdomains: ['a', 'b', 'c'],
+        attribution: 'Map tiles by <a href="https://stamen.com/">Stamen Design</a>, under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Data by <a href="https://www.openstreetmap.org/#map=8/47.714/13.349">OpenStreetMap</a> under <a href="https://www.openstreetmap.org/copyright"ODbL</a>'
+    }),
+    stamen_terrain: L.tileLayer("https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg", {
+        subdomains: ['a', 'b', 'c'],
+        attribution: 'Map tiles by <a href="https://stamen.com/">Stamen Design</a>, under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Data by <a href="https://www.openstreetmap.org/#map=8/47.714/13.349">OpenStreetMap</a> under <a href="https://www.openstreetmap.org/copyright"ODbL</a>'
+    }),
+    stamen_watercolor: L.tileLayer("https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg", {
+        subdomains: ['a', 'b', 'c'],
+        attribution: 'Map tiles by <a href="https://stamen.com/">Stamen Design</a>, under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Data by <a href="https://www.openstreetmap.org/#map=8/47.714/13.349">OpenStreetMap</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/"CC BY SA</a>'
+    }),
 };
 
 // OSM Basemap einbinden
@@ -78,7 +78,7 @@ const kartenLayer = {
 //     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 // }).addTo(karte);
 
-kartenLayer.osm.addTo(karte);
+kartenLayer.geolandgrey.addTo(karte);
 
 //Kartenmenü hinzufügen
 L.control.layers({
@@ -93,7 +93,7 @@ L.control.layers({
     "Stamen Toner": kartenLayer.stamen_toner,
     "Stamen Terrain": kartenLayer.stamen_terrain,
     "Stamen Watercolor": kartenLayer.stamen_watercolor
-    
+
 
 }).addTo(karte);
 
@@ -148,7 +148,32 @@ karte.addControl(new L.Control.Fullscreen());
 var coords = new L.Control.Coordinates(); // you can send options to the constructor if you want to, otherwise default values are used
 // Plugin an Karte hängen
 coords.addTo(karte);
-karte.on('click', function(e) {
-	coords.setCoordinates(e);
+karte.on('click', function (e) {
+    coords.setCoordinates(e);
 });
+
+
+// GPX einfügen
+new L.GPX("AdlerwegEtappeO3.gpx", {
+    async: true,
+    marker_options: {
+        startIconUrl: 'images/pin-icon-start.png',
+        endIconUrl: 'images/pin-icon-end.png',
+        shadowUrl: 'images/pin-shadow.png'
+    }
+}).on('loaded', function (e) {
+
+    karte.fitBounds(e.target.getBounds()); // Höhenprofil
+}).on("addline", function (e) {
+    console.log("linie geladen")
+    const controlElevation = L.control.elevation({
+        detachedView: true,
+        elevationDiv: "#elevation-div",
+    });
+    controlElevation.addTo(karte);
+    controlElevation.addData(e.line);
+}).addTo(karte);
+
+
+
 

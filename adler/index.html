@@ -15,10 +15,17 @@
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
     <script src="blicke.js"></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' /> 
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
+        rel='stylesheet' />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-hash/0.2.1/leaflet-hash.js"></script>
-    <link href="plugins/Control.Coordinates.css" rel="stylesheet"/>
+    <link href="plugins/Control.Coordinates.css" rel="stylesheet" />
     <script src="plugins/Control.Coordinates.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.4.0/gpx.min.js"></script>
+
+    <script src="https://unpkg.com/d3@4.13.0/build/d3.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@raruto/leaflet-elevation@latest/leaflet-elevation.css" />
+    <script src="https://unpkg.com/@raruto/leaflet-elevation@latest/leaflet-elevation.js"></script>
+
     <script defer src="main.js"></script>
 
 
@@ -161,10 +168,13 @@
             data-title1="Eisseehütte" data-title2="Bonn-Matreier-Hütte">
 
         </div>
+
+        <div id="elevation-div"></div>
         <!-- TODO: ein div-Element mit dem id-Attribut "map" und drei weiteren Attributen data-lat, data-lng und data-title. Die Koordinaten von data-lat und data-lng sind als Dezimalgrad mit einem "." als Komma zu schreiben und aus der Wikipedia zu entnehmen. Das data-title Attribut enthält einen Titel für die oben verwendete Sehenswürdigkeit
     -->
+        
 
-        <h3>Links</h3>
+        <h3 style = "clear: both">Links</h3>
         <ul>
             <li><a href="https://www.tirol.at/reisefuehrer/sport/wandern/adlerweg">Alle Etappen des Adlerwegs auf
                     tirol.at</a></li>
@@ -187,7 +197,7 @@
 
         <a class="back" href="https://alexderbanause.github.io/adler/index.html" title="vorhergehender Stop"><i
                 class="fas fa-arrow-circle-left"></i>
-                vorhergehender Stop</a>
+            vorhergehender Stop</a>
         <a class="next" href="https://susannehonka.github.io/adler/index.html" title="nächster Stop">nächster Stop <i
                 class="fas fa-arrow-circle-right"></i></a>
 
