@@ -165,14 +165,54 @@ new L.GPX("AdlerwegEtappeO3.gpx", {
 
     karte.fitBounds(e.target.getBounds()); // Höhenprofil
 }).on("addline", function (e) {
-    console.log("linie geladen")
+    // console.log("linie geladen")
     const controlElevation = L.control.elevation({
+        
         detachedView: true,
         elevationDiv: "#elevation-div",
     });
     controlElevation.addTo(karte);
     controlElevation.addData(e.line);
-}).addTo(karte);
+    const gpxLinie = e.line.getLatLngs();
+    // console.log(gpxLinie);
+
+    // Steigung einfärben
+    for (let i = 1; i < gpxLinie.length; i +=1){
+        // console.log(gpxLinie[i]);
+        let p1 = gpxLinie[i-1];
+        let p2 = gpxLinie[i];
+        let dist = karte.distance(
+            [p1.lat, p1.lng],
+            [p2.lat,p2.lng]
+        );
+        let delta = (p2.meta.ele - p1.meta.ele)
+        // verkürzte if Schreibweise: wenn distanz nichtgleich 0, dann delta/dist * 100, sonst 0
+        // to.Fixed: Runden auf 1 Nachkommastelle
+        let proz = (dist != 0 ? delta / dist * 100.00 : 0).toFixed(1);
+        // console.log("Distanz: ", dist, "Höhenunterschied: ", delta, "Steigung: ", proz)
+        
+        // colorbrewer
+        
+        let farbe = 
+            proz >= 10 ? "#d73027":
+            proz >= 6 ? "#fc8d59":
+            proz >= 2 ? "#fee08b":
+            proz >= 0 ? "#ffffbf":
+            proz >= -6 ? "#d9ef8b":
+            proz >= -10 ? "#91cf60":
+                        "#1a9850";
+            L.polyline(
+                [
+                    [p1.lat, p1.lng],
+                    [p2.lat, p2.lng],
+                ], {
+                    color: farbe,
+                }
+            ).addTo(karte);
+
+    }
+
+})//.addTo(karte);
 
 
 
