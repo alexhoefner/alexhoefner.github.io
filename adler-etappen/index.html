@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="https://unpkg.com/@raruto/leaflet-elevation@latest/leaflet-elevation.css" />
     <script src="https://unpkg.com/@raruto/leaflet-elevation@latest/leaflet-elevation.js"></script>
 
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
     <script src="etappen.js"></script>
 
     <link rel="stylesheet" href="main.css">
@@ -49,15 +53,15 @@
         <div id="elevation-div"></div>
 
         <h3>Streckenverlauf</h3>
-        <p>Tourdaten:
-            Ausgangspunkt <span id="daten_start"></span>,
-            Ziel <span id="daten_ziel"></span>,
-            Aufstieg <span id="daten_bergauf"></span>m,
-            Abstieg <span id="daten_bergab"></span>m,
-            höchster Punkt <span id="daten_maxhoehe"></span>m,
-            Schwierigkeitsgrad <span id="daten_grad"></span>,
-            Gesamtlänge <span id="daten_km"></span> Kilometer,
-            Gehzeit <span id="daten_stunden"></span> Stunden.
+        <p><h3>Tourdaten:</h3>
+            <b>Ausgangspunkt: </b><span id="daten_start"></span>,<br>
+            <b>Ziel: </b><span id="daten_ziel"></span>,<br>
+            <b>Aufstieg: </b><span id="daten_bergauf"></span>m,<br>
+            <b>Abstieg: </b><span id="daten_bergab"></span>m,<br>
+            <b>höchster Punkt: </b><span id="daten_maxhoehe"></span>m,<br>
+            <b>Schwierigkeitsgrad: </b><span id="daten_grad"></span>,<br>
+            <b>Gesamtlänge: </b><span id="daten_km"></span> Kilometer,<br>
+            <b>Gehzeit:</b> <span id="daten_stunden"></span> Stunden.
         </p>
 
         <p id="daten_strecke"></p>

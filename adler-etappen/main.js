@@ -102,6 +102,16 @@ function etappeErzeugen(nummer) {
 
     document.getElementById("daten_titel").innerHTML = daten.titel;
     document.getElementById("daten_info").innerHTML = daten.info;
+    document.getElementById("daten_strecke").innerHTML = daten.strecke;
+    document.getElementById("daten_start").innerHTML = daten.start;
+    document.getElementById("daten_ziel").innerHTML = daten.ziel;
+    document.getElementById("daten_bergauf").innerHTML = daten.bergauf;
+    document.getElementById("daten_bergab").innerHTML = daten.bergab;
+    document.getElementById("daten_maxhoehe").innerHTML = daten.maxhoehe;
+    document.getElementById("daten_grad").innerHTML = daten.grad;
+    document.getElementById("daten_km").innerHTML = daten.km;
+    document.getElementById("daten_stunden").innerHTML = daten.stunden;
+    document.getElementById("daten_einkehr").innerHTML = daten.einkehr;
 
     // GPX Track laden
     console.log(daten.gpsid);
@@ -121,10 +131,11 @@ function etappeErzeugen(nummer) {
     }).addTo(gpxGruppe);
 
     gpxTrack.on("loaded", function () {
-        karte.fitBounds(gpxTrack.getBounds());
+       // karte.fitBounds(gpxTrack.getBounds());
     })
 
     gpxTrack.on("addline", function (evt) {
+        // bestehendes Profil löschen
         if (controlElevation) {
             controlElevation.clear();
             document.getElementById("elevation-div").innerHTML="";
@@ -148,3 +159,28 @@ pulldown.onchange = function (evt) {
     etappeErzeugen(opts[opts.selectedIndex].value)
 }
 console.log(pulldown);
+
+
+
+
+// Routing
+const routingMachine = L.Routing.control({}).addTo(karte);
+
+
+
+let start, end;
+
+karte.on('click', function(ev){
+    console.log("Clicked: ", ev);
+    if (!start) {
+        start = ev.latlng;
+        alert("Start gesetzt, bitte 2. Punkt für Ende setzen. ", ev.latlng)
+    } else {
+        end = ev.latlng;
+        routingMachine.setWaypoints([start, end])
+        routingMachine.route();
+        start = null;
+    }
+    console.log("Start: ", start, "End: ", end);
+    
+})
