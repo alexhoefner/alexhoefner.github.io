@@ -83,10 +83,16 @@ new L.Control.MiniMap(
 // die Implementierung der Karte startet hier
 
 let pulldown = document.getElementById("etappenPulldown");
-for (let i=0; i < ETAPPEN.length; i++) {
+for (let i = 0; i < ETAPPEN.length; i++) {
     // console.log(ETAPPEN[i])
     pulldown.innerHTML += `<option value ="${i}">${ETAPPEN[i].titel}</option>`
 }
+
+
+let gpxGruppe = L.featureGroup().addTo(karte);
+layerControl.addOverlay(gpxGruppe, "GPX-Track");
+
+let controlElevation = null;
 
 function etappeErzeugen(nummer) {
     let daten = ETAPPEN[nummer];
@@ -99,18 +105,39 @@ function etappeErzeugen(nummer) {
 
     // GPX Track laden
     console.log(daten.gpsid);
-    daten.gpsid = daten.gpsid.replace("A","");
+    daten.gpsid = daten.gpsid.replace("A", "");
     console.log(daten.gpsid)
+
+    gpxGruppe.clearLayers();
 
     const gpxTrack = new L.GPX(`gpx/AdlerwegEtappe${daten.gpsid}.gpx`, {
         async: true,
-        marker_options : {
-            startIconUrl : 'icons/pin-icon-start.png',
-            endIconUrl : 'icons/pin-icon-end.png',
+        marker_options: {
+            startIconUrl: 'icons/pin-icon-start.png',
+            endIconUrl: 'icons/pin-icon-end.png',
             shadowUrl: 'icons/pin-shadow.png',
-            iconSize: [32,37]
+            iconSize: [32, 37]
         }
-    }).addTo(karte);
+    }).addTo(gpxGruppe);
+
+    gpxTrack.on("loaded", function () {
+        karte.fitBounds(gpxTrack.getBounds());
+    })
+
+    gpxTrack.on("addline", function (evt) {
+        if (controlElevation) {
+            controlElevation.clear();
+            document.getElementById("elevation-div").innerHTML="";
+        }
+        // Höhenprofil erzeugen
+        controlElevation = L.control.elevation({
+            theme: "steelblue-theme",
+            detachedView: true,
+            elevationDiv: "#elevation-div"
+        })
+        controlElevation.addTo(karte);
+        controlElevation.addData(evt.line);
+    })
 }
 etappeErzeugen(0);
 
